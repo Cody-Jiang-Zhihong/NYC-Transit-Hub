@@ -1,0 +1,255 @@
+:root {
+  --bg: #f4efe6;
+  --surface: rgba(255, 252, 247, 0.88);
+  --surface-strong: #fffaf2;
+  --ink: #172033;
+  --muted: #58627a;
+  --line: rgba(23, 32, 51, 0.12);
+  --accent: #0d4c92;
+  --accent-strong: #d8512f;
+  --ok: #1d7f56;
+  --warn: #c9671f;
+  --shadow: 0 24px 60px rgba(23, 32, 51, 0.12);
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Instrument Sans", "Segoe UI", sans-serif;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(216, 81, 47, 0.15), transparent 26%),
+    radial-gradient(circle at top right, rgba(13, 76, 146, 0.15), transparent 28%),
+    linear-gradient(180deg, #f2ede4 0%, #f6f1e9 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  width: min(1240px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.5rem 0 3rem;
+}
+
+.surface {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+  padding: 1.4rem;
+}
+
+.hero-panel {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 1.25rem;
+}
+
+.hero-panel h1,
+.surface h2,
+.surface h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+}
+
+.hero-panel h1 {
+  font-size: clamp(2.6rem, 5vw, 4.8rem);
+  line-height: 0.95;
+  margin: 0.4rem 0 0.9rem;
+  max-width: 10ch;
+}
+
+.hero-copy,
+.muted,
+.service-card p,
+.station-row p,
+.mini-card span {
+  color: var(--muted);
+}
+
+.hero-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 260px;
+}
+
+.pill,
+.flag,
+.route-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.84rem;
+}
+
+.pill.is-live,
+.flag.ok {
+  background: rgba(29, 127, 86, 0.12);
+  color: var(--ok);
+}
+
+.pill.is-demo,
+.flag.warn {
+  background: rgba(201, 103, 31, 0.12);
+  color: var(--warn);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  color: var(--accent);
+  margin: 0;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.summary-band,
+.button-row,
+.split-header,
+.service-heading,
+.station-row,
+.station-flags {
+  display: flex;
+  align-items: center;
+}
+
+.summary-band {
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-block: 1px solid var(--line);
+  margin: 1rem 0;
+}
+
+.summary-band div {
+  display: grid;
+}
+
+.summary-band strong {
+  font-size: 1.8rem;
+}
+
+.service-grid,
+.list-block,
+.station-table {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.service-grid {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.service-card,
+.mini-card,
+.account-card,
+.station-row {
+  background: var(--surface-strong);
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-radius: 22px;
+  padding: 1rem;
+}
+
+.route-badge {
+  color: white;
+  background: var(--accent);
+  min-width: 2.4rem;
+  justify-content: center;
+}
+
+.button-row {
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.button-row.compact button {
+  margin-bottom: 0;
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.85rem;
+}
+
+.map-frame {
+  min-height: 420px;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.locale-picker,
+.search-input {
+  margin: 0;
+}
+
+.split-header {
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+}
+
+.station-row {
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.station-flags {
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.outline {
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .hero-panel,
+  .grid-two {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .hero-panel {
+    align-items: start;
+  }
+
+  .stacked-mobile {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .split-header,
+  .station-row {
+    flex-direction: column;
+    align-items: start;
+  }
+}
