@@ -21,7 +21,7 @@ export function ServiceBoard({ title, summary, services, alerts, onFavoriteSave,
       </div>
       <div className="service-grid">
         {services.map((service) => (
-          <section className="service-card" key={service.route_id}>
+          <section className={`service-card status-${(service.status ?? '').toLowerCase().replace(/\s+/g, '-')}`} key={service.route_id}>
             <div className="service-heading">
               <span className="route-badge">{service.route_id}</span>
               <strong>{service.name}</strong>
