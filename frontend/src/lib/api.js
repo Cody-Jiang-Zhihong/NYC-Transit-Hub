@@ -27,6 +27,10 @@ export function fetchAccessibility() {
   return request('/api/accessibility')
 }
 
+export function fetchMapRoutes() {
+  return request('/api/routes/map')
+}
+
 export function fetchFavorites(authState) {
   return request('/api/favorites', {}, authState)
 }

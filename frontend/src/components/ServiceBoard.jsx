@@ -1,4 +1,4 @@
-export function ServiceBoard({ title, summary, services, alerts, onFavoriteSave, onAlertSave, disabled, labels }) {
+export function ServiceBoard({ title, summary, services, alerts, onFavoriteSave, onAlertSave, disabled, labels, selectedRoute, onRouteSelect }) {
   return (
     <article className="surface">
       <header>
@@ -21,14 +21,19 @@ export function ServiceBoard({ title, summary, services, alerts, onFavoriteSave,
       </div>
       <div className="service-grid">
         {services.map((service) => (
-          <section className={`service-card status-${(service.status ?? '').toLowerCase().replace(/\s+/g, '-')}`} key={service.route_id}>
+          <section
+            className={`service-card status-${(service.status ?? '').toLowerCase().replace(/\s+/g, '-')}${selectedRoute === service.route_id ? ' is-selected' : ''}`}
+            key={service.route_id}
+            onClick={() => onRouteSelect?.(service.route_id === selectedRoute ? null : service.route_id)}
+            style={{ cursor: 'pointer' }}
+          >
             <div className="service-heading">
               <span className="route-badge">{service.route_id}</span>
               <strong>{service.name}</strong>
             </div>
             <p>{service.message}</p>
             <small>{service.updated_at}</small>
-            <div className="button-row compact">
+            <div className="button-row compact" onClick={e => e.stopPropagation()}>
               <button className="outline" disabled={disabled} onClick={() => onFavoriteSave({
                 route_id: service.route_id,
                 station_name: service.primary_station,

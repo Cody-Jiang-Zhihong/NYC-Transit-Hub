@@ -278,6 +278,12 @@ button, input, select { font-family: inherit; }
 .service-card.status-delay         { border-left-color: #ef4444; }
 .service-card.status-planned-work  { border-left-color: var(--warn); }
 
+/* Selected state — highlighted ring */
+.service-card.is-selected {
+  box-shadow: 0 0 0 2px var(--accent), var(--shadow-lg);
+  background: #eef3ff;
+}
+
 /* ─── Mini / account / station cards ─────────────────────────────────────── */
 .mini-card,
 .account-card,
@@ -344,6 +350,11 @@ button, input, select { font-family: inherit; }
 
 .legend-pill:hover { transform: scale(1.12); }
 .legend-pill.faded { opacity: 0.22; }
+
+/* Warning dot on pills for routes with active disruptions */
+.legend-pill.has-issue {
+  box-shadow: 0 0 0 2.5px #ef4444;
+}
 
 .vehicle-btn {
   font-size: 0.8rem;

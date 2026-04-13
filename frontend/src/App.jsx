@@ -13,6 +13,7 @@ import {
   fetchAlerts,
   fetchDashboard,
   fetchFavorites,
+  fetchMapRoutes,
 } from './lib/api'
 import { translations } from './lib/translations'
 
@@ -21,6 +22,8 @@ const authClient = createAuthClient()
 function App() {
   const [locale, setLocale] = useState('en')
   const [dashboard, setDashboard] = useState(null)
+  const [mapData, setMapData] = useState(null)
+  const [selectedRoute, setSelectedRoute] = useState(null)
   const [favorites, setFavorites] = useState([])
   const [alerts, setAlerts] = useState([])
   const [stations, setStations] = useState([])
@@ -38,12 +41,14 @@ function App() {
 
   const loadDashboard = useEffectEvent(async () => {
     try {
-      const [dashboardResponse, accessibilityResponse] = await Promise.all([
+      const [dashboardResponse, accessibilityResponse, mapRoutesResponse] = await Promise.all([
         fetchDashboard(),
         fetchAccessibility(),
+        fetchMapRoutes(),
       ])
       setDashboard(dashboardResponse)
       setStations(accessibilityResponse.stations ?? [])
+      setMapData(mapRoutesResponse)
       setStatusMessage(
         dashboardResponse.meta?.live
           ? t.connectedLive
@@ -194,6 +199,8 @@ function App() {
           onAlertSave={handleAlertSave}
           disabled={isBusy}
           labels={t}
+          selectedRoute={selectedRoute}
+          onRouteSelect={setSelectedRoute}
         />
         <AuthPanel
           labels={t}
@@ -208,8 +215,12 @@ function App() {
       <section className="grid-two stacked-mobile">
         <TransitMap
           labels={t}
-          routes={dashboard?.map_data?.routes ?? []}
-          stations={dashboard?.map_data?.stations ?? []}
+          routes={mapData?.routes ?? dashboard?.map_data?.routes ?? []}
+          stations={mapData?.stations ?? dashboard?.map_data?.stations ?? []}
+          accessibilityStations={stations}
+          services={dashboard?.services ?? []}
+          selectedRoute={selectedRoute}
+          onRouteSelect={setSelectedRoute}
         />
         <FavoritesPanel
           labels={t}
