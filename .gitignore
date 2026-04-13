@@ -1,0 +1,31 @@
+# Python virtual environment
+backend/.venv/
+backend/venv/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# SQLite database (local only)
+backend/transit_hub.db
+*.db
+
+# Environment secrets
+.env
+backend/.env
+frontend/.env
+
+# Frontend build output
+frontend/dist/
+frontend/node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Claude Code memory
+memory/
+status.md
